@@ -10,6 +10,17 @@ input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+
+footer {
+  display: block;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: red;
+  color: white;
+  text-align: center;
+}
+
 input[type="number"] {
     -moz-appearance: textfield;
 }
