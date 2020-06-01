@@ -16,10 +16,10 @@
             <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
             <div class="block-4 text-center border">
                 <figure class="block-4-image">
-                    <a href="shop-single.html"><img src="../images/<?php echo $producto['Fotografia'] ?>" alt="Image placeholder" class="img-fluid"></a>
+                    <a href="shop-single.html?product=<?php echo $producto['Clave_Producto'] ?>"><img src="../images/<?php echo $producto['Fotografia'] ?>" alt="Image placeholder" class="img-fluid"></a>
                     </figure>
                     <div class="block-4-text p-4">
-                    <h3><a href="shop-single.html"><?php echo $producto['Nombre_Producto'] ?></a></h3>
+                    <h3><a href="shop-single.html?product=<?php echo $producto['Clave_Producto'] ?>"><?php echo $producto['Nombre_Producto'] ?></a></h3>
                     <!--p class="mb-0">Finding perfect products</p-->
                     <p class="mb-0"><?php echo "Cat: ".$producto['Categoria_Producto']." | Talla: ".$producto['Talla']." | Color: ".$producto['Color'] ?></p> <!-- Lo uso para corroborar -->
                     <p class="text-primary font-weight-bold">$<?php echo $producto['Precio'] ?></p>
