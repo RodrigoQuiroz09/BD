@@ -24,7 +24,7 @@
                     <div class="input-group-prepend">
                       <button class="btn btn-outline-primary" type="button" onclick="add('-', 'quantity-<?php echo $producto['Clave_Producto'] ?>', 'stock-<?php echo $producto['Clave_Producto'] ?>');">&minus;</button>
                     </div>
-                    <input type="text" class="form-control text-center" value="<?php echo $producto['Cantidad'] ?>" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" id="quantity-<?php echo $producto['Clave_Producto'] ?>">
+                    <input type="text" class="form-control text-center" value="<?php echo $producto['Cantidad'] ?>" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" id="quantity-<?php echo $producto['Clave_Producto'] ?>" readonly>
                     <input type="hidden" id="stock-<?php echo $producto['Clave_Producto'] ?>" value="<?php echo $producto['Piezas_Disponibles'] ?>">
                     <div class="input-group-append">
                       <button class="btn btn-outline-primary" type="button" onclick="add('+', 'quantity-<?php echo $producto['Clave_Producto'] ?>', 'stock-<?php echo $producto['Clave_Producto'] ?>');">&plus;</button>
@@ -36,14 +36,25 @@
                 <td><a href="" class="btn btn-primary btn-sm">X</a></td>
             </tr>
 
-<?php } ?>   
+    <?php } ?>   
+
     <script>
         function add(op, id_quantity, id_stock) {
-            if (op == "+")
-                if (document.getElementById(id_quantity).value < document.getElementById(id_stock).value)
+            if (op == "+") {
+                if (document.getElementById(id_quantity).value < document.getElementById(id_stock).value) {
                     document.getElementById(id_quantity).value++;
-            if (op == "-")
-                if (document.getElementById(id_quantity).value > 1)
+                }
+            }
+            if (op == "-") {
+                if (document.getElementById(id_quantity).value > 1) {
                     document.getElementById(id_quantity).value--;
+                }
+            }
+
+            $.ajax({
+                url:"../php/update-cart.php",
+                method:"POST",
+                data: {product: id_stock.substr(-1, 1), quantity: document.getElementById(id_quantity).value},
+            })
         }
     </script>
