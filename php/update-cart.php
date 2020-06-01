@@ -24,6 +24,9 @@
         mysqli_query($enlace, $update_query); 
     }
     if ($_POST["op"] == "checkout") {
+        $update_inventory = "UPDATE (carro_compra NATURAL JOIN inventario) SET Piezas_Disponibles = (Piezas_Disponibles - Cantidad)  WHERE (correo_electronico = '".$_SESSION["correo"]."');";
+        mysqli_query($enlace, $update_inventory); 
+
         $update_query = "DELETE FROM carro_compra WHERE (correo_electronico = '".$_SESSION["correo"]."');";
         mysqli_query($enlace, $update_query); 
     }

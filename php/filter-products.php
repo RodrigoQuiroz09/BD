@@ -22,7 +22,7 @@
                     <div class="block-4-text p-4">
                     <h3><a href="shop-single.html?product=<?php echo $producto['Clave_Producto'] ?>"><?php echo $producto['Nombre_Producto'] ?></a></h3>
                     <!--p class="mb-0">Finding perfect products</p-->
-                    <p class="mb-0"><?php echo "Cat: ".$producto['Categoria_Producto']." | Talla: ".$producto['Talla']." | Color: ".$producto['Color'] ?></p> <!-- Lo uso para corroborar -->
+                    <p class="mb-0"><?php echo "".$producto['Categoria_Producto']." | ".$producto['Color']." <br> Size: ".$producto['Talla'] ?></p> <!-- Lo uso para corroborar -->
                     <p class="text-primary font-weight-bold">$<?php echo $producto['Precio'] ?></p>
                     </div>
                 </div>

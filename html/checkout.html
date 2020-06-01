@@ -141,9 +141,11 @@
                  
                   <select class="form-control" name='expireYY' id='expireYY'>
                       <option value=''>Year</option>
-                      <option value='10'>15</option>
-                      <option value='11'>16</option>
-                      <option value='12'>17</option>
+                      <option value='20'>20</option>
+                      <option value='21'>21</option>
+                      <option value='22'>22</option>
+                      <option value='22'>23</option>
+                      <option value='22'>24</option>
                   </select> 
   
                   <input class="inputCard" type="hidden" name="expiry" id="expiry" maxlength="4"/>
@@ -177,7 +179,7 @@
 
                   </table>
                   <div class="form-group">
-                    <button class="btn btn-primary btn-lg py-3 btn-block" onclick="window.location='thankyou.html'">Place Order</button>
+                    <button class="btn btn-primary btn-lg py-3 btn-block" onclick="place_order(); window.location='thankyou.html'">Place Order</button>
                   </div>
 
                 </div>
@@ -281,7 +283,7 @@
       $.ajax({
         url:"../php/update-cart.php",
         method:"POST",
-        data: {}
+        data: {op: "checkout"}
       })
     }
 
