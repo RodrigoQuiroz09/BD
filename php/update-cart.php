@@ -10,11 +10,26 @@
 
     // OBTENER ELEMENTOS CON EL QUERY 
     if ($_POST["op"] == "add") {
-        $update_query = "INSERT INTO carro_compra VALUES ('".$_SESSION["correo"]."', '".$_POST["product"]."', '".$_POST["quantity"]."')";
+        $update_query = "INSERT INTO carro_compra VALUES ('".$_SESSION["correo"]."', '".$_POST["product"]."', '".$_POST["quantity"]."');";
         mysqli_query($enlace, $update_query); 
     }
     if ($_POST["op"] == "update") {
-        $update_query = "UPDATE carro_compra SET Cantidad = '".$_POST["quantity"]."' WHERE  (Clave_Producto = '".$_POST["product"]."')";
+        $update_query = "UPDATE carro_compra SET Cantidad = '".$_POST["quantity"]."' WHERE  (Clave_Producto = '".$_POST["product"]."');";
         mysqli_query($enlace, $update_query); 
+        obtenerTotal($enlace);
+    }
+    if ($_POST["op"] == "remove") {
+        $update_query = "DELETE FROM carro_compra WHERE (Clave_Producto = '".$_POST["product"]."');";
+        mysqli_query($enlace, $update_query); 
+    }
+    if ($_POST["op"] == "getTotal") {
+        obtenerTotal($enlace);
+    }
+
+    function obtenerTotal($enlace_bd) {
+        $update_precio = "SELECT SUM(Precio * Cantidad) AS total FROM carro_compra NATURAL JOIN inventario WHERE (correo_electronico = '".$_SESSION["correo"]."');";
+        $precio_total = mysqli_query($enlace_bd, $update_precio); 
+        $total = mysqli_fetch_assoc($precio_total);
+        echo "$".$total['total']." MXN";
     }
 ?>

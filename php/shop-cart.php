@@ -37,7 +37,7 @@
                   <p>In stock: <?php echo $producto['Piezas_Disponibles'] ?></p>
                 </td>
                 <td>$<?php echo $producto['Precio'] ?></td>
-                <td><a href="" class="btn btn-primary btn-sm">X</a></td>
+                <td><a href="" class="btn btn-primary btn-sm" onclick="removeProduct(<?php echo $producto['Clave_Producto'] ?>);">X</a></td>
             </tr>
 
     <?php } ?>   
@@ -59,6 +59,20 @@
                 url:"../php/update-cart.php",
                 method:"POST",
                 data: {op: "update", product: id_stock.substr(-1, 1), quantity: document.getElementById(id_quantity).value},
+                success:function(data){
+                  $('#total_div').html(data);
+                }
             })
         }
+
+        $(document).ready(function(){
+          $.ajax({
+            url:"../php/update-cart.php",
+            method:"POST",
+            data: {op: "getTotal"},
+            success:function(data){
+              $('#total_div').html(data);
+            }
+          })
+        })
     </script>
