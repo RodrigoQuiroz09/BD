@@ -88,11 +88,13 @@
             <div class="col-md-6 mb-5 mb-md-0">
               <h2 class="h3 mb-3 text-black">Login</h2>
               <div class="p-3 p-lg-5 border">
-              
+
+
+                <form action="../php/LoginForm.php" method="post">
                 <div class="form-group row mb-5">
                   <div class="col-md-12">
                     <label for="c_email_address" class="text-black">Email Address <span class="text-danger">*</span></label>
-                    <input type="email" class="form-control" id="c_email_address" name="c_email_address" placeholder="example@mail.com">
+                    <input type="text" class="form-control"  name="email" placeholder="example@mail.com" required>
                   </div>
   
                 </div>
@@ -100,13 +102,19 @@
                 <div class="form-group row mb-5">
                   <div class="col-md-12">
                     <label for="c_password" class="text-black">Password <span class="text-danger">*</span></label>
-                    <input type="password" class="form-control" id="c_password" name="c_password">
+                    <input type="password" class="form-control" name="password" required>
                   </div>
                 </div>
-                <a href="index.html" class="btn btn-sm btn-primary">Log in</a>
+
+
+
+                <input type="submit" name="Login" value="INICIAR SESIÓN">
                 <p>
 
                 </p>
+
+                </form>
+
                 <div class="form-group">
                   <a href="Register.html">Create account?</a>
                 </div>

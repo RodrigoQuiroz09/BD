@@ -7,7 +7,10 @@
 <body>
 
 <?php
-$email = $name = $Apellidos = $password = "";
+$email = $_POST['email'];
+$name = $_POST['name'];
+$Apellidos = $_POST['Apellidos'];
+$password = $_POST['password'];;
 $email_error = $name_error = $Apellidos_error = $password_error ="";
 
 $enlace = mysqli_connect("127.0.0.1:3308", "usuarioConsultas", "14122000Em!", "proyecto_final_tienda");
@@ -88,7 +91,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
             mysqli_stmt_bind_param($stmt, "sssss", $email, $name, $Apellidos, $password, $admin_no);
             if(mysqli_stmt_execute($stmt))
             {
-                header("location: LoginForm.php");
+                header("location: Login.html");
             }
             mysqli_stmt_close($stmt);
             mysqli_close($enlace);
@@ -101,22 +104,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 }
 
 ?>
-
-<h1>Registro de Usuario</h1>
-
-<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-<p>Ingresa los siguientes datos para realizar el Registro</p>
-<p> Correo </p>
-<input type="text" required name="email" value="<?php echo $email; ?>">
-<p> Nombre </p>
-<input type="text" required name="name" value="<?php echo $name; ?>">
-<p> Apellidos </p>
-<input type="text" required name="Apellidos" value="<?php echo $Apellidos; ?>">
-<p> Password </p>
-<input type="password" required name="password" value="<?php echo $password; ?>">
-<br> </br>
-<input type="submit" name="Login" value="REGISTRARSE">
-</form>
 
 </body>
 <html>
