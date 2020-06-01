@@ -6,7 +6,7 @@ $password = $_POST['password'];;
 $email_error = $name_error = $Apellidos_error = $password_error ="";
 
 //$enlace = mysqli_connect("127.0.0.1", "andres", "Andres.123", "proyecto_final_tienda");
-$enlace = mysqli_connect("127.0.0.1:3308", "usuarioConsultas", "14122000Em!", "proyecto_final_tienda");
+//$enlace = mysqli_connect("127.0.0.1:3308", "usuarioConsultas", "14122000Em!", "proyecto_final_tienda");
 
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
