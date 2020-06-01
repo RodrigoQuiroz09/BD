@@ -6,8 +6,8 @@
     error_reporting(E_ALL); //DEBUG
     ini_set('display_errors', 1);  //DEBUG
       
-    $enlace = mysqli_connect("127.0.0.1", "andres", "Andres.123", "proyecto_final_tienda");
-    //$enlace = mysqli_connect("127.0.0.1", "usuarioConsultas", "14122000Em!", "proyecto_final_tienda");
+    //$enlace = mysqli_connect("127.0.0.1", "andres", "Andres.123", "proyecto_final_tienda");
+    $enlace = mysqli_connect("127.0.0.1:3308", "usuarioConsultas", "14122000Em!", "proyecto_final_tienda");
 
     // OBTENER ELEMENTOS CON EL QUERY 
     $query_filtro = "SELECT DISTINCT * FROM carro_compra NATURAL JOIN inventario WHERE (correo_electronico = '".$_SESSION["correo"]."');";    
