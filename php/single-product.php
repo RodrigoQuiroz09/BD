@@ -9,7 +9,7 @@
     $query_filtro = "select * from INVENTARIO where (Clave_Producto = '".$_POST["key"]."');";    
     $filtro = mysqli_query($enlace, $query_filtro);
 
-        while($producto = mysqli_fetch_assoc($filtro)) {  ?>
+        $producto = mysqli_fetch_assoc($filtro);?>
 
             <div class="container">
                 <div class="row">
@@ -22,14 +22,24 @@
                     <p>Category: <?php echo $producto['Categoria_Producto'] ?> &emsp;| &emsp;Color: <?php echo $producto['Color'] ?> &emsp;| &emsp;Size: <?php echo $producto['Talla'] ?></p>
                     <p><strong class="text-primary h4">$<?php echo $producto['Precio'] ?></strong></p>
                     <div>
-                    <div class="input-group mb-3" style="max-width: 120px;">
-                    <div class="input-group-prepend">
-                        <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
-                    </div>
-                    <input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
-                    </div>
+                        <script>
+                            function add(op) {
+                                if (op == "+")
+                                    if (document.getElementById('quantity').value < parseInt(<?php echo $producto['Piezas_Disponibles'] ?>))
+                                        document.getElementById('quantity').value++;
+                                if (op == "-")
+                                    if (document.getElementById('quantity').value > 1)
+                                        document.getElementById('quantity').value--;
+                            }
+                        </script>
+                        <div class="input-group mb-3" style="max-width: 120px;">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-outline-primary" type="button" onclick="add('-');">&minus;</button>
+                        </div>
+                        <input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" id="quantity">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-primary" type="button" onclick="add('+');">&plus;</button>
+                        </div>
                     </div>
                     <p>In Stock: <?php echo $producto['Piezas_Disponibles'] ?></p>
 
@@ -39,5 +49,3 @@
                 </div>
                 </div>
             </div>
-
-<?php } ?>   
