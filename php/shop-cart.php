@@ -1,13 +1,16 @@
 <?php
+    // ADQUIRIR SESIÓN
+    session_start();
+
     // ENLACE A LA BASE DE DATOS
     error_reporting(E_ALL); //DEBUG
     ini_set('display_errors', 1);  //DEBUG
       
-    //$enlace = mysqli_connect("127.0.0.1", "andres", "Andres.123", "proyecto_final_tienda");
-    $enlace = mysqli_connect("127.0.0.1", "usuarioConsultas", "14122000Em!", "proyecto_final_tienda");
+    $enlace = mysqli_connect("127.0.0.1", "andres", "Andres.123", "proyecto_final_tienda");
+    //$enlace = mysqli_connect("127.0.0.1", "usuarioConsultas", "14122000Em!", "proyecto_final_tienda");
 
     // OBTENER ELEMENTOS CON EL QUERY 
-    $query_filtro = "SELECT DISTINCT * FROM carro_compra NATURAL JOIN inventario WHERE (correo_electronico = '".$_POST["user"]."');";    
+    $query_filtro = "SELECT DISTINCT * FROM carro_compra NATURAL JOIN inventario WHERE (correo_electronico = '".$_SESSION["correo"]."');";    
     $filtro = mysqli_query($enlace, $query_filtro);
 
         while($producto = mysqli_fetch_assoc($filtro)) {  ?>
@@ -55,7 +58,7 @@
             $.ajax({
                 url:"../php/update-cart.php",
                 method:"POST",
-                data: {product: id_stock.substr(-1, 1), quantity: document.getElementById(id_quantity).value},
+                data: {op: "update", product: id_stock.substr(-1, 1), quantity: document.getElementById(id_quantity).value},
             })
         }
     </script>

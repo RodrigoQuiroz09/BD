@@ -1,11 +1,3 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Formulario Registro de Cliente</title>
-</head>
-<body>
-
 <?php
 $email = $_POST['email'];
 $name = $_POST['name'];
@@ -13,7 +5,8 @@ $Apellidos = $_POST['Apellidos'];
 $password = $_POST['password'];;
 $email_error = $name_error = $Apellidos_error = $password_error ="";
 
-$enlace = mysqli_connect("127.0.0.1:3308", "usuarioConsultas", "14122000Em!", "proyecto_final_tienda");
+$enlace = mysqli_connect("127.0.0.1", "andres", "Andres.123", "proyecto_final_tienda");
+//$enlace = mysqli_connect("127.0.0.1:3308", "usuarioConsultas", "14122000Em!", "proyecto_final_tienda");
 
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
@@ -104,6 +97,3 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 }
 
 ?>
-
-</body>
-<html>

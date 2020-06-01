@@ -214,12 +214,12 @@
   </body>
 
   <script>
-    function load_products(user)
+    function load_products()
     {
       $.ajax({
         url:"../php/shop-cart.php",
         method:"POST",
-        data: {user:user},
+        data: {},
         success:function(data){
           $('#cart_content').html(data);
         }
@@ -227,7 +227,7 @@
     }
 
     $(document).ready(function(){
-      load_products("andres@gmail.com");
+      load_products();
     })
   </script>
 

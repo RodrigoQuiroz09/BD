@@ -1,4 +1,7 @@
 <?php
+    // ADQUIRIR SESIÓN
+    session_start();
+
     // ENLACE A LA BASE DE DATOS
     error_reporting(E_ALL); //DEBUG
     ini_set('display_errors', 1);  //DEBUG
@@ -36,7 +39,7 @@
                         <div class="input-group-prepend">
                             <button class="btn btn-outline-primary" type="button" onclick="add('-');">&minus;</button>
                         </div>
-                        <input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" id="quantity">
+                        <input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" id="quantity" readonly>
                         <div class="input-group-append">
                             <button class="btn btn-outline-primary" type="button" onclick="add('+');">&plus;</button>
                         </div>
@@ -44,8 +47,18 @@
                     <p>In Stock: <?php echo $producto['Piezas_Disponibles'] ?></p>
 
                     </div>
-                    <p><a href="cart.html" class="buy-now btn btn-sm btn-primary">Add To Cart</a></p>
+                    <p><a href="cart.html" class="buy-now btn btn-sm btn-primary" onclick="addToCart()">Add To Cart</a></p>
 
                 </div>
                 </div>
             </div>
+        
+        <script>
+            function addToCart() {
+                $.ajax({
+                    url:"../php/update-cart.php",
+                    method:"POST",
+                    data: {op: "add", product: <?php echo $producto['Clave_Producto'] ?>, quantity: document.getElementById("quantity").value},
+                })
+            }
+        </script>

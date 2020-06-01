@@ -1,10 +1,3 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Login de Usuario</title>
-</head>
-<body>
 <?php
 session_start();
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true)
@@ -13,12 +6,13 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true)
     exit;
 }
 
-$enlace = mysqli_connect("127.0.0.1:3308", "usuarioConsultas", "14122000Em!", "proyecto_final_tienda");
+$enlace = mysqli_connect("127.0.0.1", "andres", "Andres.123", "proyecto_final_tienda");
+//$enlace = mysqli_connect("127.0.0.1:3308", "usuarioConsultas", "14122000Em!", "proyecto_final_tienda");
 
 $email = $_POST['email'];
 $password = $_POST['password'];
 $email_error = $password_error ="";
-$_SESSION["correo"] = "";
+$_SESSION["correo"] = "";   
 
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
@@ -52,7 +46,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                 if(mysqli_stmt_num_rows($stmt)==1)
                 {
                     $_SESSION["correo"] = $email;
-                    header("location: ../images/men.jpg");
+                    header("location: ../html/index.html");
                     //FALTA ASIGNAR LAS VARIABLES DE SESION
                 }
                 else{
@@ -70,17 +64,3 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     mysqli_close($enlace);
 }
 ?>
-<!--
-<h1>Ingreso a Cuenta</h1>
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-    <p>Ingresa los siguientes datos para iniciar Sesión</p>
-    <p> Correo </p>
-    <input type="text" required name="email" value="<?php echo $email; ?>">
-    <p> Password </p>
-    <input type="password" required name="password" value="<?php echo $password; ?>">
-    <br> </br>
-    <input type="submit" name="Login" value="INICIAR SESIÓN">
-    </form>´
--->
-</body>
-<html>
