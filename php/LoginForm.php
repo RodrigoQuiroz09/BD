@@ -9,13 +9,14 @@
 session_start();
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true)
 {
-    header("location: LoginForm.php");
+    header("location: ../html/Login.html");
     exit;
 }
 
 $enlace = mysqli_connect("127.0.0.1:3308", "usuarioConsultas", "14122000Em!", "proyecto_final_tienda");
 
-$email = $password = "";
+$email = $_POST['email'];
+$password = $_POST['password'];
 $email_error = $password_error ="";
 $_SESSION["correo"] = "";
 
@@ -51,14 +52,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                 if(mysqli_stmt_num_rows($stmt)==1)
                 {
                     $_SESSION["correo"] = $email;
-                    header("location: Bebe_Amarillo.jpg");
+                    header("location: ../images/men.jpg");
                     //FALTA ASIGNAR LAS VARIABLES DE SESION
                 }
+                else{
+                    header("location: ../html/Login.html");
+                }
             }
+
             else
             {
-                $password_error = "No se ha encontrado una cuenta con el correo y password proporcionados. Intentar de nuevo";
-                echo "Se ha presentado un error ajeno a nosotros. Favor de intentar el registro nuevamente";
+                header("location: ../html/Login.html");
             }
             mysqli_stmt_close($stmt);
         }
@@ -66,6 +70,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     mysqli_close($enlace);
 }
 ?>
+<!--
 <h1>Ingreso a Cuenta</h1>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
     <p>Ingresa los siguientes datos para iniciar Sesión</p>
@@ -76,6 +81,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     <br> </br>
     <input type="submit" name="Login" value="INICIAR SESIÓN">
     </form>´
-
+-->
 </body>
 <html>
