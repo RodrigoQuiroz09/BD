@@ -6,8 +6,13 @@
     error_reporting(E_ALL); //DEBUG
     ini_set('display_errors', 1);  //DEBUG
       
-    $enlace = mysqli_connect("127.0.0.1", "andres", "Andres.123", "proyecto_final_tienda");
-    //$enlace = mysqli_connect("127.0.0.1:3308", "usuarioConsultas", "14122000Em!", "proyecto_final_tienda");
+    //$enlace = mysqli_connect("127.0.0.1", "andres", "Andres.123", "proyecto_final_tienda");
+    $enlace = mysqli_connect("127.0.0.1:3308", "usuarioConsultas", "14122000Em!", "proyecto_final_tienda");
+
+
+  
+    
+
 
     // OBTENER ELEMENTOS CON EL QUERY 
     if ($_POST["op"] == "add") {
@@ -24,7 +29,9 @@
         mysqli_query($enlace, $update_query); 
     }
     if ($_POST["op"] == "checkout") {
-        $update_inventory = "UPDATE (carro_compra NATURAL JOIN inventario) SET Piezas_Disponibles = (Piezas_Disponibles - Cantidad)  WHERE (correo_electronico = '".$_SESSION["correo"]."');";
+        echo $_POST["op"];
+
+        $update_inventory = "UPDATE (carro_compra NATURAL JOIN inventario) SET Piezas_Disponibles = (Piezas_Disponibles - Cantidad)  WHERE (inventario.Clave_Producto = '".$_POST["product"]."');";
         mysqli_query($enlace, $update_inventory); 
 
         $update_query = "DELETE FROM carro_compra WHERE (correo_electronico = '".$_SESSION["correo"]."');";

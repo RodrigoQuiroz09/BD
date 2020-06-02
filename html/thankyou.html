@@ -30,10 +30,11 @@
           <div class="row align-items-center">
 
             <div class="col-6 col-md-4 order-2 order-md-1 site-search-icon text-left">
-              <form action="" class="site-block-top-search">
-                <span class="icon icon-search2"></span>
-                <input type="text" class="form-control border-0" placeholder="Search">
-              </form>
+
+              <a  href="index.html"  onclick="logout()" class="site-cart" >
+                <span class="icon icon-sign-out"></span>
+              </a>
+
             </div>
 
             <div class="col-12 mb-3 mb-md-0 col-md-4 order-1 order-md-2 text-center">
@@ -144,6 +145,16 @@
     $(document).ready(function(){
       load_name();
     })
+
+      
+  function logout() {
+      $.ajax({
+        url:"../php/logout.php",
+        method:"POST",
+      })
+    }
+
+
   </script>
   <script src="../js/jquery-3.3.1.min.js"></script>
   <script src="../js/jquery-ui.js"></script>

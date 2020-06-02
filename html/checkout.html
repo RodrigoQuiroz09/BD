@@ -29,10 +29,11 @@
           <div class="row align-items-center">
 
             <div class="col-6 col-md-4 order-2 order-md-1 site-search-icon text-left">
-              <form action="" class="site-block-top-search">
-                <span class="icon icon-search2"></span>
-                <input type="text" class="form-control border-0" placeholder="Search">
-              </form>
+
+              <a  href="index.html"  onclick="logout()" class="site-cart" >
+                <span class="icon icon-sign-out"></span>
+              </a>
+
             </div>
 
             <div class="col-12 mb-3 mb-md-0 col-md-4 order-1 order-md-2 text-center">
@@ -78,26 +79,25 @@
             <div class="p-3 p-lg-5 border">
 
 
-             
-
+              <form action="../php/insert_checkout.php" method="post">
               <div class="form-group row">
                 <div class="col-md-12">
                   <label for="c_address" class="text-black">Address <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" id="c_address" name="c_address" placeholder="Calle, colonia, etc.">
+                  <input type="text" class="form-control" name="c_address" placeholder="Calle, colonia, etc.">
                 </div>
               </div>
 
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Apartamento, unidad etc. (opcional)">
+                <input type="text" class="form-control" name = "a_address" placeholder="Apartamento, unidad etc. (opcional)">
               </div>
               <div class="form-group row">
                 <div class="col-md-6">
                   <label for="c_phone" class="text-black">Phone (optional)</label>
-                  <input type="tel" pattern="([(+]*[0-9]+[()+. -]*)" autocomplete="cc-number"class="form-control" id="c_phone" name="c_phone">
+                  <input type="text" pattern="([(+]*[0-9]+[()+. -]*)" autocomplete="cc-number"class="form-control" name="c_phone">
                 </div>
                 <div class="col-md-6">
                   <label for="c_postal_zip" class="text-black">Postal / Zip <span class="text-danger">*</span></label>
-                  <input type="tel" pattern="^(\d{5})" autocomplete="cc-number" class="form-control" id="c_postal_zip" name="c_postal_zip" >
+                  <input type="text" pattern="^(\d{5})" autocomplete="cc-number" class="form-control" name="c_postal_zip" >
                 </div>
               </div>
 
@@ -105,7 +105,7 @@
                 <div class="col-md-12">
                   <label for="c_tarjeta" class="text-black">Número de la Tarjeta <span class="text-danger">*</span></label>
         
-                  <select >
+                  <select name ="tarjeta">
 
                     <option value='Visa'>Visa</option>
                     <option value='MasterCard'>MasterCard</option>
@@ -179,7 +179,7 @@
 
                   </table>
                   <div class="form-group">
-                    <button class="btn btn-primary btn-lg py-3 btn-block" onclick="place_order(); window.location='thankyou.html'">Place Order</button>
+                    <button type="submit" class="btn btn-primary btn-lg py-3 btn-block" onclick="place_order(); window.location='thankyou.html'">Place Order</button>
                   </div>
 
                 </div>
@@ -188,7 +188,8 @@
 
           </div>
         </div>
-        <!-- </form> -->
+        </form>
+
       </div>
     </div>
 
@@ -307,6 +308,15 @@
     $(document).ready(function(){
       load_name();
     })
+      
+  function logout() {
+      $.ajax({
+        url:"../php/logout.php",
+        method:"POST",
+      })
+    }
+
+
   </script>
 
 </html>
