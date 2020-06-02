@@ -6,8 +6,8 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true)
     exit;
 }
 
-$enlace = mysqli_connect("127.0.0.1", "andres", "Andres.123", "proyecto_final_tienda");
-//$enlace = mysqli_connect("127.0.0.1:3308", "usuarioConsultas", "14122000Em!", "proyecto_final_tienda");
+//$enlace = mysqli_connect("127.0.0.1", "andres", "Andres.123", "proyecto_final_tienda");
+$enlace = mysqli_connect("127.0.0.1:3308", "usuarioConsultas", "14122000Em!", "proyecto_final_tienda");
 
 $email = $_POST['email'];
 $password = $_POST['password'];
