@@ -84,7 +84,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
             mysqli_stmt_bind_param($stmt, "sssss", $email, $name, $Apellidos, $password, $admin_no);
             if(mysqli_stmt_execute($stmt))
             {
-                header("location: index.html");
+                header("location: ../html/index.html");
             }
             mysqli_stmt_close($stmt);
             mysqli_close($enlace);

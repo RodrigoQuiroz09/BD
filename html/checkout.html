@@ -78,26 +78,26 @@
             <h2 class="h3 mb-3 text-black">Billing Details</h2>
             <div class="p-3 p-lg-5 border">
 
-
               <form action="../php/insert_checkout.php" method="post">
+
               <div class="form-group row">
                 <div class="col-md-12">
                   <label for="c_address" class="text-black">Address <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" name="c_address" placeholder="Calle, colonia, etc.">
+                  <input type="text" class="form-control" name="c_address" placeholder="Calle, colonia, etc." required>
                 </div>
               </div>
 
               <div class="form-group">
-                <input type="text" class="form-control" name = "a_address" placeholder="Apartamento, unidad etc. (opcional)">
+                <input type="text" class="form-control" name = "a_address" placeholder="Apartamento, unidad etc. (opcional)" required>
               </div>
               <div class="form-group row">
                 <div class="col-md-6">
                   <label for="c_phone" class="text-black">Phone (optional)</label>
-                  <input type="text" pattern="([(+]*[0-9]+[()+. -]*)" autocomplete="cc-number"class="form-control" name="c_phone">
+                  <input type="text" pattern="^(\d{10})" autocomplete="cc-number"class="form-control" name="c_phone">
                 </div>
                 <div class="col-md-6">
                   <label for="c_postal_zip" class="text-black">Postal / Zip <span class="text-danger">*</span></label>
-                  <input type="text" pattern="^(\d{5})" autocomplete="cc-number" class="form-control" name="c_postal_zip" >
+                  <input type="text" pattern="^(\d{5})" autocomplete="cc-number" class="form-control" name="c_postal_zip" required >
                 </div>
               </div>
 
@@ -113,7 +113,7 @@
                   
                   </select>
              
-                  <input  type="tel" pattern="^(?:\d{15,16}|\d{4}(?:(?:\s+\d{4}){3}|\s+\d{6}\s\d{5}))$" autocomplete="cc-number" class="form-control" id="c_tarjeta" name="c_tarjeta">
+                  <input  type="tel" pattern="^(?:\d{15,16}|\d{4}(?:(?:\s+\d{4}){3}|\s+\d{6}\s\d{5}))$" autocomplete="cc-number" class="form-control" id="c_tarjeta" name="c_tarjeta" required>
                 </div>
               </div>
 
@@ -122,7 +122,7 @@
                   <label for="c_date" class="text-black">Expiration Date</label>
                   <div class="form-group">
                     
-                    <select class="form-control"  name='expireMM' id='expireMM' >
+                    <select class="form-control"  name='expireMM' id='expireMM' required>
                       <option value=''>Month</option>
                       <option value='01'>01</option>
                       <option value='02'>02</option>
@@ -139,7 +139,7 @@
                   </select> 
                
                  
-                  <select class="form-control" name='expireYY' id='expireYY'>
+                  <select class="form-control" name='expireYY' id='expireYY' required>
                       <option value=''>Year</option>
                       <option value='20'>20</option>
                       <option value='21'>21</option>
@@ -154,7 +154,7 @@
                 </div>
                 <div class="col-md-6">
                   <label for="c_cvc" class="text-black">CVC <span class="text-danger">*</span></label>
-                  <input type="tel" pattern="([0-9]){3}|([0-9]){4}" autocomplete="cc-number"class="form-control" id="c_date" name="c_date">
+                  <input type="tel" pattern="([0-9]){3}|([0-9]){4}" autocomplete="cc-number"class="form-control" id="c_date" name="c_date" required>
                 </div>
               </div>
             </div>
@@ -179,7 +179,7 @@
 
                   </table>
                   <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-lg py-3 btn-block" onclick="place_order(); window.location='thankyou.html'">Place Order</button>
+                    <button type="submit" class="btn btn-primary btn-lg py-3 btn-block" onclick="place_order();">Place Order</button>
                   </div>
 
                 </div>
@@ -199,7 +199,8 @@
         <div class="row">
           <div class="col-sm-12 col-md-6">
             <h6>About</h6>
-            <p class="text-justify">DESCRIPCIÓN DEL PROYECTO</p>
+              <p class="text-justify">Final Databases Project; online's shop replication using mutli-language (PHP, HTML, CSS, and JS). Hope you like it!</p>
+
           </div>
 
           <div class="col-xs-6 col-md-3">
@@ -284,7 +285,8 @@
       $.ajax({
         url:"../php/update-cart.php",
         method:"POST",
-        data: {op: "checkout"}
+        data: {op: "checkout", tarjeta:document.getElementsByName("tarjeta")}
+
       })
     }
 
