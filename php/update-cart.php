@@ -6,14 +6,10 @@
     error_reporting(E_ALL); //DEBUG
     ini_set('display_errors', 1);  //DEBUG
       
-    $enlace = mysqli_connect("127.0.0.1", "andres", "Andres.123", "proyecto_final_tienda");
-    //$enlace = mysqli_connect("127.0.0.1:3308", "usuarioConsultas", "14122000Em!", "proyecto_final_tienda");
+    //$enlace = mysqli_connect("127.0.0.1", "andres", "Andres.123", "proyecto_final_tienda");
+    $enlace = mysqli_connect("127.0.0.1:3308", "usuarioConsultas", "14122000Em!", "proyecto_final_tienda");
 
     // OBTENER ELEMENTOS CON EL QUERY 
-    if ($_POST["op"] == "checkout") {  
-        $update_inventory = "UPDATE (carro_compra NATURAL JOIN inventario) SET Piezas_Disponibles = (Piezas_Disponibles - Cantidad)  WHERE (correo_electronico = '".$_SESSION["correo"]."');";
-        mysqli_query($enlace, $update_inventory); 
-    }
     if ($_POST["op"] == "add") {
         $update_query = "INSERT INTO carro_compra VALUES ('".$_SESSION["correo"]."', ".$_POST["product"].", '".$_POST["quantity"]."');";
         mysqli_query($enlace, $update_query); 

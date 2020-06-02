@@ -179,7 +179,7 @@
 
                   </table>
                   <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-lg py-3 btn-block" onclick="place_order();">Place Order</button>
+                    <button type="submit" class="btn btn-primary btn-lg py-3 btn-block" >Place Order</button>
                   </div>
 
                 </div>
@@ -281,14 +281,6 @@
       })
     }
 
-    function place_order() {
-      $.ajax({
-        url:"../php/update-cart.php",
-        method:"POST",
-        data: {op: "checkout", tarjeta:document.getElementsByName("tarjeta")}
-
-      })
-    }
 
     $(document).ready(function(){
       load_products();
