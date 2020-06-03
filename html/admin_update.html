@@ -85,24 +85,24 @@
               <div class="form-group row">
                 <div class="col-md-12">
                   <label for="product_details" class="text-black">Detalles del Producto <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" name="clave_producto" placeholder="Clave de Producto" required>
+                  <input type="text" class="form-control" id="clave_producto" placeholder="Clave de Producto" required>
                 </div>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" name = "nombre_producto" placeholder="Nombre del Producto" required>
+                <input type="text" class="form-control" id="nombre_producto" placeholder="Nombre del Producto" required>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" name = "descripcion_producto" placeholder="Descripción" required>
+                <input type="text" class="form-control" id="descripcion_producto" placeholder="Descripción" required>
               </div>
 
               <div class="form-group row">
                 <div class="col-md-6">
                   <label for="label_precio" class="text-black">Precio <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" name = "precio_producto" placeholder="00.00" required>
+                  <input type="text" class="form-control" id="precio_producto" placeholder="00.00" required>
                 </div>
                 <div class="col-md-6">
                   <label for="label_foto" class="text-black">Nombre de Imagen</label>
-                  <input type="text" class="form-control" name = "imagen_producto" placeholder="imagen_1.png">
+                  <input type="text" class="form-control" id="imagen_producto" placeholder="imagen_1.png">
                 </div>
               </div>
 
@@ -140,7 +140,7 @@
                   <label for="size_label" class="text-black">Size</label>
                   <div class="form-group">
                     
-                    <select class="form-control"  name='size_producto' id='size_producto' required>
+                    <select class="form-control"  name='talla_producto' id='talla_producto' required>
                       <option value='S'>S</option>
                       <option value='M'>M</option>
                       <option value='L'>L</option>
@@ -157,7 +157,7 @@
                       <div class="input-group-prepend">
                         <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
                       </div>
-                      <input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                      <input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" id="piezas_producto">
                       <div class="input-group-append">
                         <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
                       </div>
@@ -168,7 +168,7 @@
               </div>
 
               <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-lg py-3 btn-block" >Add Product</button>
+                <button type="submit" class="btn btn-primary btn-lg py-3 btn-block" onclick="add_product()">Add Product</button>
               </div>
 
             </div>
@@ -179,16 +179,15 @@
             <div class="row mb-5">
               <div class="col-md-12">
                 <h2 class="h3 mb-3 text-black">Current Orders</h2>
-                <div class="p-3 p-lg-5 border">
+                <div class="p-3 p-lg-5 border" style="max-height: 300px; overflow: auto;">
                   <table class="table site-block-order-table mb-5">
                     <thead>
                       <th>Ticket</th> <!-- Incluye Fecha -->
                       <th>User</th>
                       <th>Product</th> <!-- Incluye Cantidad -->
-                      <th>Total</th>
                     </thead>
                     
-                    <!-- LISTA DE COMPRA -->
+                    <!-- LISTA DE ORDENES GENERADAS -->
                     <tbody id="order_list">
                       <!-- OBTENER ELEMENTOS MEDIANTE QUERY -->
                     </tbody>
@@ -201,16 +200,16 @@
             <div class="row mb-5">
               <div class="col-md-12">
                 <h2 class="h3 mb-3 text-black">Update Inventory</h2>
-                <div class="p-3 p-lg-5 border">
+                <div class="p-3 p-lg-5 border" style="max-height: 300px; overflow: auto;">
                   <table class="table site-block-order-table mb-5">
                     <thead>
-                      <th>Product ID</th>
+                      <th>Product ID</th> <!-- Incluye Cantidad -->
                       <th>Stock</th>
                       <th>Remove</th>
                     </thead>
                     
-                    <!-- LISTA DE COMPRA -->
-                    <tbody id="order_list">
+                    <!-- LISTA DEL INVENTARIO ACTUAL -->
+                    <tbody id="inventory_list">
                       <!-- OBTENER ELEMENTOS MEDIANTE QUERY -->
                     </tbody>
 
@@ -281,7 +280,7 @@
 
   <script src="../js/main.js"></script>
 
-  <script>  function logout() {
+<script>  function logout() {
     $.ajax({
       url:"../php/logout.php",
       method:"POST",
@@ -289,5 +288,80 @@
   }
 </script>
     
-  </body>
+</body>
+
+<script>
+  function load_orders() {
+    $.ajax({
+      url:"../php/admin.php",
+      method:"POST",
+      data: {op: "load-o"},
+      success:function(data){
+        $('#order_list').html(data);
+      }
+    })
+  }
+
+  function load_inventory() {
+    $.ajax({
+      url:"../php/admin.php",
+      method:"POST",
+      data: {op: "load-i"},
+      success:function(data){
+        $('#inventory_list').html(data);
+      }
+    })
+  }
+
+  function add_product() {
+    var clave = document.getElementById("clave_producto").value; 
+    var nombre = document.getElementById("nombre_producto").value; 
+    var descripcion = document.getElementById("descripcion_producto").value; 
+    var precio = document.getElementById("precio_producto").value; 
+    var imagen = document.getElementById("imagen_producto").value; 
+    var categoria = document.getElementById("categoria_producto").value; 
+    var color = document.getElementById("color_producto").value; 
+    var talla = document.getElementById("talla_producto").value; 
+    var piezas = document.getElementById("piezas_producto").value; 
+    $.ajax({
+    url:"../php/admin.php",
+    method:"POST",
+    data: {op: "add", clave: clave, nombre: nombre, descripcion: descripcion, precio: precio, imagen: imagen, categoria: categoria, color: color, talla: talla, piezas: piezas},
+    })
+    load_inventory();
+  }
+
+  function update_product(op, id) {
+    var id_quantity = "quantity-" + id; 
+    if (op == "+") {
+        document.getElementById(id_quantity).value++;
+    }
+    if (op == "-") {
+        if (document.getElementById(id_quantity).value > 0) {
+            document.getElementById(id_quantity).value--;
+        }
+    }
+    $.ajax({
+    url:"../php/admin.php",
+    method:"POST",
+    data: {op: "update", product: parseInt(id), quantity: document.getElementById(id_quantity).value}
+    })
+    load_inventory();
+  }
+
+  function remove_product(id) {
+    $.ajax({
+    url:"../php/admin.php",
+    method:"POST",
+    data: {op: "remove", product: id}
+    })
+    load_inventory();
+  }
+
+  $(document).ready(function(){
+    load_orders();
+    load_inventory();
+  })
+</script>
+
 </html>
