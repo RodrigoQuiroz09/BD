@@ -67,6 +67,7 @@
     <div class="bg-light py-3">
       <div class="container">
         <div class="row" id="nombres">
+
         </div>
       </div>
     </div>  
@@ -362,6 +363,23 @@
     load_orders();
     load_inventory();
   })
+
+  function load_name()
+  {
+    $.ajax({
+      url:"../php/name.php",
+      method:"POST",
+      data: {},
+      success:function(data){
+        $('#nombres').html(data);
+      }
+    })
+  }
+
+  $(document).ready(function(){
+    load_name();
+  })
+
 </script>
 
 </html>
