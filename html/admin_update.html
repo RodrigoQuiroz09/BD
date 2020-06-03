@@ -64,67 +64,167 @@
     </header>
   
 
+    <div class="bg-light py-3">
+      <div class="container">
+        <div class="row" id="nombres">
+        </div>
+      </div>
+    </div>  
+
     <div class="site-section">
       <div class="container">
-        <h2 class="h3 mb-3 text-black">Add to Stock</h2>
-          <div class="p-3 p-lg-5 border">
-            <input class="form-control" placeholder="ID del producto">
-            <input class="form-control" placeholder="Nombre del producto">
-            <textarea class = "form-control" name="comentarios" rows="5" cols="40" placeholder="Descripción"></textarea>
-            
-            <p></p>
-            <div class="row">
-            <div class="col-md-6 ">
-            <h5>Precio</h5>
-            <p><input type="number" step="0.01" min="0" max="1000" class="form-control" placeholder="50.00"></p>
 
-            <h5>Foto</h5>
-            <p><input type="text" step="0.01" class="form-control"  placeholder="Nombre de la Foto"></p>
+        <div class="row">
+          <!-- AGREGAR PRODUCTO A INVENTARIO -->
+          <div class="col-md-5 mb-5 mb-md-0">
+            <h2 class="h3 mb-3 text-black">Add to Stock</h2>
+            <div class="p-3 p-lg-5 border">
 
-            <div class="form-group row">
-              <div class="col-md-6">
-                <h5>Color</h5>
-                <div class="form-group">
-                  
-                  <select class="form-control"  name='Color' id='color' required>
-    
-                    <option value='Red'>Red</option>
-                    <option value='Gre'>Green</option>
-                    <option value='03'>Purple</option>
-                    <option value='04'>Blue</option>
-                </select> 
+              <form action="" method="post">
 
-                </div></div></div>
-
-            <h5>Talla</h5>
-            <p><input type="text" step="0.01" class="form-control"  placeholder="S" style= "width: 100px;"></p>
-      
-      
-       
-
-            <div class="form-group row">
-              <div class="col-md-8">
-              <div class="input-group mb-4" style="max-width: 200px;">
-              <div class="input-group-prepend">
-                <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
+              <div class="form-group row">
+                <div class="col-md-12">
+                  <label for="product_details" class="text-black">Detalles del Producto <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" name="clave_producto" placeholder="Clave de Producto" required>
+                </div>
               </div>
-              <input type="number" class="form-control text-center" value="15" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" style="width: 100px;">
-              <div class="input-group-append">
-                <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
+              <div class="form-group">
+                <input type="text" class="form-control" name = "nombre_producto" placeholder="Nombre del Producto" required>
               </div>
-            </div>
+              <div class="form-group">
+                <input type="text" class="form-control" name = "descripcion_producto" placeholder="Descripción" required>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-md-6">
+                  <label for="label_precio" class="text-black">Precio <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" name = "precio_producto" placeholder="00.00" required>
+                </div>
+                <div class="col-md-6">
+                  <label for="label_foto" class="text-black">Nombre de Imagen</label>
+                  <input type="text" class="form-control" name = "imagen_producto" placeholder="imagen_1.png">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-md-6">
+                  <label for="category_label" class="text-black">Category</label>
+                  <div class="form-group">
+                    
+                    <select class="form-control"  name='categoria_producto' id='categoria_producto' required>
+                      <option value='Men'>Men</option>
+                      <option value='Women'>Women</option>
+                      <option value='Children'>Children</option>
+                    </select> 
+
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="color_label" class="text-black">Color</label>
+                  <div class="form-group">
+                    
+                    <select class="form-control"  name='color_producto' id='color_producto' required>
+                      <option value='Red'>Red</option>
+                      <option value='Green'>Green</option>
+                      <option value='Blue'>Blue</option>
+                      <option value='Purple'>Purple</option>
+                    </select> 
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-md-6">
+                  <label for="size_label" class="text-black">Size</label>
+                  <div class="form-group">
+                    
+                    <select class="form-control"  name='size_producto' id='size_producto' required>
+                      <option value='S'>S</option>
+                      <option value='M'>M</option>
+                      <option value='L'>L</option>
+                    </select> 
+
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="stock_label" class="text-black">Stock</label>
+                  <div class="form-group">
+                    
+                    <div class="input-group mb-3" style="max-width: 120px;">
+                      <div class="input-group-prepend">
+                        <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
+                      </div>
+                      <input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-lg py-3 btn-block" >Add Product</button>
               </div>
 
             </div>
           </div>
+
+          <div class="col-md-7">
+            <!-- VISUALIZACIÓN DE ADMINISTRADOR -->
+            <div class="row mb-5">
+              <div class="col-md-12">
+                <h2 class="h3 mb-3 text-black">Current Orders</h2>
+                <div class="p-3 p-lg-5 border">
+                  <table class="table site-block-order-table mb-5">
+                    <thead>
+                      <th>Ticket</th> <!-- Incluye Fecha -->
+                      <th>User</th>
+                      <th>Product</th> <!-- Incluye Cantidad -->
+                      <th>Total</th>
+                    </thead>
+                    
+                    <!-- LISTA DE COMPRA -->
+                    <tbody id="order_list">
+                      <!-- OBTENER ELEMENTOS MEDIANTE QUERY -->
+                    </tbody>
+
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-5">
+              <div class="col-md-12">
+                <h2 class="h3 mb-3 text-black">Update Inventory</h2>
+                <div class="p-3 p-lg-5 border">
+                  <table class="table site-block-order-table mb-5">
+                    <thead>
+                      <th>Product ID</th>
+                      <th>Stock</th>
+                      <th>Remove</th>
+                    </thead>
+                    
+                    <!-- LISTA DE COMPRA -->
+                    <tbody id="order_list">
+                      <!-- OBTENER ELEMENTOS MEDIANTE QUERY -->
+                    </tbody>
+
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
-        <p><a href="admin_inv.html" class="buy-now btn btn-sm btn-primary">ADD ITEM</a></p>
-        </div>
-        </div>         
-        </div>
+        </form>
+
       </div>
     </div>
-  </div>
 
   <footer class="site-footer">
     <div class="container">
