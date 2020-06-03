@@ -6,8 +6,8 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true)
     exit;
 }
 
-$enlace = mysqli_connect("127.0.0.1", "andres", "Andres.123", "proyecto_final_tienda");
-//$enlace = mysqli_connect("127.0.0.1:3308", "usuarioConsultas", "14122000Em!", "proyecto_final_tienda");
+//$enlace = mysqli_connect("127.0.0.1", "andres", "Andres.123", "proyecto_final_tienda");
+$enlace = mysqli_connect("127.0.0.1:3308", "usuarioConsultas", "14122000Em!", "proyecto_final_tienda");
 
 $email = $_POST['email'];
 $password = $_POST['password'];
@@ -45,9 +45,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
             {
                 mysqli_stmt_store_result($stmt);
                 if(mysqli_stmt_num_rows($stmt)==1)
-                {
+                {   
                     $_SESSION["correo"] = $email;
-                    header("location: ../html/shop.html");
+                    $sql2 = "SELECT is_admin FROM usuario WHERE correo_electronico = '".$_SESSION["correo"]."'; ";
+                    $is = mysqli_query($enlace, $sql2);
+                    $admin = mysqli_fetch_assoc($is);
+                    
+                    if($admin['is_admin']=="Y"){
+                        header("location: ../html/admin_update.html");
+                    }
+                    else{
+ 
+                        header("location: ../html/shop.html");
+                    }
+
                     //FALTA ASIGNAR LAS VARIABLES DE SESION
                 }
                 else{
