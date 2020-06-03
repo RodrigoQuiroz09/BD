@@ -6,7 +6,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true)
     exit;
 }
 
-//$enlace = mysqli_connect("127.0.0.1", "andres", "Andres.123", "proyecto_final_tienda");
+////$enlace = mysqli_connect("127.0.0.1", "andres", "Andres.123", "proyecto_final_tienda");
 $enlace = mysqli_connect("127.0.0.1:3308", "usuarioConsultas", "14122000Em!", "proyecto_final_tienda");
 
 $email = $_POST['email'];
@@ -14,6 +14,7 @@ $password = $_POST['password'];
 $email_error = $password_error ="";
 $_SESSION["correo"] = "";
 $_SESSION["nombre"] = "";   
+$_SESSION["is_admin"] ="";
 
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
@@ -50,6 +51,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                     $sql2 = "SELECT is_admin FROM usuario WHERE correo_electronico = '".$_SESSION["correo"]."'; ";
                     $is = mysqli_query($enlace, $sql2);
                     $admin = mysqli_fetch_assoc($is);
+                    $_SESSION["is_admin"]=$admin['is_admin'];
                     
                     if($admin['is_admin']=="Y"){
                         header("location: ../html/admin_update.html");
@@ -62,13 +64,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                     //FALTA ASIGNAR LAS VARIABLES DE SESION
                 }
                 else{
-                    header("location: ../html/shop.html");
+                    header("location: ../html/index.html");
                 }
             }
 
             else
             {
-                header("location: ../html/shop.html");
+                header("location: ../html/index.html");
             }
             mysqli_stmt_close($stmt);
         }
