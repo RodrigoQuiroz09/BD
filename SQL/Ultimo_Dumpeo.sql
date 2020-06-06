@@ -169,7 +169,7 @@ CREATE TABLE `usuario` (
   `correo_electronico` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Nombre` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Apellidos` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Contra` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Contra` varchar(256) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Direccion` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `Codigo_postal` varchar(5) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `Telefono` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
