@@ -2,7 +2,8 @@
     // ADQUIRIR SESIÓN
     session_start();
 
-    $enlace = mysqli_connect("127.0.0.1:3308", "usuarioConsultas", "14122000Em!", "proyecto_final_tienda");
+    $enlace = mysqli_connect("127.0.0.1", "andres", "Andres.123", "proyecto_final_tienda");
+    //$enlace = mysqli_connect("127.0.0.1:3308", "usuarioConsultas", "14122000Em!", "proyecto_final_tienda");
 
     if($_SESSION["is_admin"]!="Y") 
     {   
@@ -12,15 +13,9 @@
     }
     else{
 
-    
-
     // ENLACE A LA BASE DE DATOS
     error_reporting(E_ALL); //DEBUG
     ini_set('display_errors', 1);  //DEBUG
-      
-    //$enlace = mysqli_connect("127.0.0.1", "andres", "Andres.123", "proyecto_final_tienda");
-
-
 
 
     if ($_POST["op"] == "load-o") {
