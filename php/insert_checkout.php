@@ -9,6 +9,16 @@
     $enlace = mysqli_connect("127.0.0.1", "andres", "Andres.123", "proyecto_final_tienda");
     //$enlace = mysqli_connect("127.0.0.1:3308", "usuarioConsultas", "14122000Em!", "proyecto_final_tienda");
 
+    // REVISAR INVENTARIO DISPONIBLE
+    $inventory_check = "SELECT DISTINCT * FROM carro_compra NATURAL JOIN inventario WHERE (correo_electronico = '".$_SESSION["correo"]."');";
+    $check = mysqli_query($enlace, $inventory_check) or die(mysqli_error($enlace));
+    while($producto = mysqli_fetch_assoc($check)) {
+        if ($producto['Piezas_Disponibles'] < $producto['Cantidad']) {
+            header("location: ../html/error.html");
+            exit(); 
+        }
+    }
+
     $update_inventory = "UPDATE (carro_compra NATURAL JOIN inventario) SET Piezas_Disponibles = (Piezas_Disponibles - Cantidad)  WHERE (correo_electronico = '".$_SESSION["correo"]."');";
     mysqli_query($enlace, $update_inventory); 
         

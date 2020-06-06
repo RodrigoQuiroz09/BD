@@ -30,6 +30,17 @@
                     </div>
                     <input type="text" class="form-control text-center" value="<?php echo $producto['Cantidad'] ?>" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" id="quantity-<?php echo $producto['Clave_Producto'] ?>" readonly>
                     <input type="hidden" id="stock-<?php echo $producto['Clave_Producto'] ?>" value="<?php echo $producto['Piezas_Disponibles'] ?>">
+                    <script> 
+                      if (<?php echo $producto['Piezas_Disponibles'] ?> < <?php echo $producto['Cantidad'] ?>) {
+                        document.getElementById("quantity-<?php echo $producto['Clave_Producto'] ?>").value = 0; 
+
+                          $.ajax({
+                            url:"../php/update-cart.php",
+                            method:"POST",
+                            data: {op: "update", product: parseInt(<?php echo $producto['Clave_Producto'] ?>), quantity: 0}
+                        })     
+                      }
+                    </script>
                     <div class="input-group-append">
                       <button class="btn btn-outline-primary" type="button" onclick="add('+', <?php echo $producto['Clave_Producto'] ?>);">&plus;</button>
                     </div>

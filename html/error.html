@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Shoppers</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,700"> 
+    <link rel="stylesheet" href="../fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/magnific-popup.css">
+    <link rel="stylesheet" href="../css/jquery-ui.css">
+    <link rel="stylesheet" href="../css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../css/owl.theme.default.min.css">
+
+
+    <link rel="stylesheet" href="../css/aos.css">
+
+    <link rel="stylesheet" href="../css/style.css">
+    
+    
+  </head>
+  <body>
+  
+  <div class="site-wrap">
+    <header class="site-navbar" role="banner">
+      <div class="site-navbar-top">
+        <div class="container">
+          <div class="row align-items-center">
+
+            <div class="col-6 col-md-4 order-2 order-md-1 site-search-icon text-left">
+
+              <a  href="index.html"  onclick="logout()" class="site-cart" >
+                <span class="icon icon-sign-out"></span>
+              </a>
+
+            </div>
+
+            <div class="col-12 mb-3 mb-md-0 col-md-4 order-1 order-md-2 text-center">
+              <div class="site-logo">
+                <a href="shop.html" class="js-logo-clone">Shoppers</a>
+              </div>
+            </div>
+
+            <div class="col-6 col-md-4 order-3 order-md-3 text-right">
+              <div class="site-top-icons">
+                <ul>
+
+                  <li>
+                    <a href="cart.html" class="site-cart">
+                      <span class="icon icon-shopping_cart"></span>
+                   
+                    </a>
+                  </li> 
+                  <li class="d-inline-block d-md-none ml-md-0"><a href="#" class="site-menu-toggle js-menu-toggle"><span class="icon-menu"></span></a></li>
+                </ul>
+              </div> 
+            </div>
+
+          </div>
+        </div>
+      </div> 
+    
+    </header>
+
+    <div class="bg-light py-3">
+      <div class="container">
+        <div class="row" id="nombres">
+        </div>
+      </div>
+    </div>  
+
+    <div class="site-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <span class="icon-remove display-3" style="color: #ff0019"></span>
+            <h2 class="display-3 text-black">Change of stock occured!</h2>
+            <p class="lead mb-5">Sorry for the invconvenience. Please review your cart.</p>
+            <p><a href="cart.html" class="btn btn-sm btn-primary">Shopping Cart</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <h6>About</h6>
+              <p class="text-justify">Final Databases Project; online's shop replication using mutli-language (PHP, HTML, CSS, and JS). Hope you like it!</p>
+
+          </div>
+
+          <div class="col-xs-6 col-md-3">
+            <h6>Integrantes</h6>
+            <ul class="footer-links">
+              <li><a>Andrés Barragán Salas</a></li>
+              <li><a>Esteban Manrique</a></li>
+              <li><a>Rodrigo Quiroz Reyes</a></li>
+  
+
+            </ul>
+          </div>
+
+          <div class="col-xs-6 col-md-3">
+            <h6>Matrículas</h6>
+            <ul class="footer-links">
+              <li><a>A01026567</a></li>
+              <li><a>A01027077</a></li>
+              <li><a>A01026546</a></li>
+
+            </ul>
+          </div>
+        </div>
+        <hr>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-sm-6 col-xs-12">
+            <p class="copyright-text">Copyright &copy; 2020 All Rights Reserved by 
+         <a href="#">TEC - CSF</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+</footer>
+
+  </div>
+  <script>
+    function load_name()
+    {
+      $.ajax({
+        url:"../php/name.php",
+        method:"POST",
+        data: {},
+        success:function(data){
+          $('#nombres').html(data);
+        }
+      })
+    }
+  
+    $(document).ready(function(){
+      load_name();
+    })
+
+      
+  function logout() {
+      $.ajax({
+        url:"../php/logout.php",
+        method:"POST",
+      })
+    }
+
+
+  </script>
+  <script src="../js/jquery-3.3.1.min.js"></script>
+  <script src="../js/jquery-ui.js"></script>
+  <script src="../js/popper.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
+  <script src="../js/owl.carousel.min.js"></script>
+  <script src="../js/jquery.magnific-popup.min.js"></script>
+  <script src="../js/aos.js"></script>
+
+  <script src="../js/main.js"></script>
+    
+  </body>
+</html>

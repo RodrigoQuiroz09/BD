@@ -51,7 +51,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 
                */
                 mysqli_stmt_store_result($stmt);
-                $mysqli = new mysqli("127.0.0.1:3308", "usuarioConsultas", "14122000Em!", "proyecto_final_tienda");
+                $mysqli = mysqli_connect("127.0.0.1", "andres", "Andres.123", "proyecto_final_tienda");
+                //$mysqli = new mysqli("127.0.0.1:3308", "usuarioConsultas", "14122000Em!", "proyecto_final_tienda");
 
                 // create a Prepared Statement to query to db
                 $smt = $mysqli->prepare("SELECT Contra FROM usuario WHERE correo_electronico = ? ");
