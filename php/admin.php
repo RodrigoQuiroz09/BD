@@ -2,12 +2,26 @@
     // ADQUIRIR SESIÓN
     session_start();
 
+    $enlace = mysqli_connect("127.0.0.1:3308", "usuarioConsultas", "14122000Em!", "proyecto_final_tienda");
+
+    if($_SESSION["is_admin"]!="Y") 
+    {   
+    echo "HEEELP";
+    header("location: ../html/index.html");
+
+    }
+    else{
+
+    
+
     // ENLACE A LA BASE DE DATOS
     error_reporting(E_ALL); //DEBUG
     ini_set('display_errors', 1);  //DEBUG
       
-    $enlace = mysqli_connect("127.0.0.1", "andres", "Andres.123", "proyecto_final_tienda");
-    //$enlace = mysqli_connect("127.0.0.1:3308", "usuarioConsultas", "14122000Em!", "proyecto_final_tienda");
+    //$enlace = mysqli_connect("127.0.0.1", "andres", "Andres.123", "proyecto_final_tienda");
+
+
+
 
     if ($_POST["op"] == "load-o") {
         $query_inventario = "SELECT * FROM transaccion NATURAL JOIN productos;";    
@@ -58,15 +72,32 @@
         <?php } 
     }
     if ($_POST["op"] == "update") {
-        $update_inventario = "UPDATE inventario SET Piezas_Disponibles = '".$_POST["quantity"]."' WHERE  (Clave_Producto = '".$_POST["product"]."');";    
-        mysqli_query($enlace, $update_inventario) or die(mysqli_error($enlace));
+
+        $update_inventario = "UPDATE inventario SET Piezas_Disponibles = ? WHERE  (Clave_Producto = '".$_POST["product"]."');";  
+        $stmt="";
+        if($stmt = mysqli_prepare($enlace, $update_inventario))
+        {
+            mysqli_stmt_bind_param($stmt, "i",  $_POST["quantity"]);
+            if(mysqli_stmt_execute($stmt)){}
+        }
     }
+
     if ($_POST["op"] == "remove") {
         $update_inventario = "DELETE FROM inventario WHERE (Clave_Producto = '".$_POST["product"]."');";    
         mysqli_query($enlace, $update_inventario) or die(mysqli_error($enlace));
     }
+
     if ($_POST["op"] == "add") {
-        $update_inventario = "INSERT INTO inventario VALUES ('".$_POST["clave"]."', '".$_POST["nombre"]."', '".$_POST["categoria"]."', '".$_POST["descripcion"]."', '".$_POST["color"]."', '".$_POST["talla"]."', '".$_POST["precio"]."', '".$_POST["imagen"]."', '".$_POST["piezas"]."');";    
-        mysqli_query($enlace, $update_inventario) or die(mysqli_error($enlace));
+        $sql2 = "INSERT INTO inventario VALUES (?,?, ?, ?, ?, ?, ?,?,?);";    
+        
+        $smt="";
+        if($smt = mysqli_prepare($enlace, $sql2))
+        {
+            mysqli_stmt_bind_param($smt, "ssssssdsi", $_POST["clave"], $_POST["nombre"], $_POST["categoria"], $_POST["descripcion"], $_POST["color"], $_POST["talla"], $_POST["precio"], $_POST["imagen"], $_POST["piezas"]);
+            if(mysqli_stmt_execute($smt)){}
+        }
+        
+        //mysqli_query($enlace, $update_inventario) or die(mysqli_error($enlace));
     }
+}
 ?>   

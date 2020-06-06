@@ -5,8 +5,8 @@ $Apellidos = $_POST['Apellidos'];
 $password = $_POST['password'];;
 $email_error = $name_error = $Apellidos_error = $password_error ="";
 
-$enlace = mysqli_connect("127.0.0.1", "andres", "Andres.123", "proyecto_final_tienda");
-//$enlace = mysqli_connect("127.0.0.1:3308", "usuarioConsultas", "14122000Em!", "proyecto_final_tienda");
+//$enlace = mysqli_connect("127.0.0.1", "andres", "Andres.123", "proyecto_final_tienda");
+$enlace = mysqli_connect("127.0.0.1:3308", "usuarioConsultas", "14122000Em!", "proyecto_final_tienda");
 
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
@@ -78,10 +78,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         $admin_no = 'N';
         $sql_query = "INSERT INTO usuario (correo_electronico, Nombre, Apellidos, Contra, is_admin) VALUES (?, ?, ?, ?, ?)";
         $stmt = "";
+        
+        $hash= password_hash($password, PASSWORD_DEFAULT, [15]);
+
 
         if($stmt = mysqli_prepare($enlace, $sql_query))
         {
-            mysqli_stmt_bind_param($stmt, "sssss", $email, $name, $Apellidos, $password, $admin_no);
+            mysqli_stmt_bind_param($stmt, "sssss", $email, $name, $Apellidos, $hash, $admin_no);
             if(mysqli_stmt_execute($stmt))
             {
                 header("location: ../html/index.html");
